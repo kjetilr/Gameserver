@@ -1,0 +1,50 @@
+\section{Introduction}
+
+Online multi-player gaming has experienced an amazing growth. Providers of the
+popular online games must deliver a reliable service to thousands of concurrent
+players meeting strict processing deadlines in order for the players to have an
+acceptable quality of experience (QoE). In order to achieve this, game worlds are
+partitioned into areas-of-interest to minimize message passing between players
+with no interaction, and allow the game world to be divided between servers.
+However, players still tend to cluster together at interesting spots making
+dynamic area rescaling and migration between servers challenging.
+
+There is a prevailing belief in the need for single threaded execution of the
+game event loop in order to preserve what is seen as critical dependencies in
+the game~\cite{Abdelkhalek2004++}. Due to this constriction, even when
+provisioning for scalability in designing an online game, service providers
+still find that the processing power on the server side is becoming scarce~\cite{Cai2002++}.
+Latency is an important metric for online multiplayer games.
+Claypool at al.~\cite{claypool++-2006} classify different types of games, and
+conclude that for first person shooter (FPS) and racing games, the threshold for
+an acceptable latency is 100ms. Furthermore, Abdelkhalek et al.~\cite{Abdelkhalek2003++}
+discuss the behavior and performance of multiplayer game
+servers. They find that in terms of benchmarking methodology, game servers are
+very different from other scientific workloads. Most of the sequentially
+implemented game servers can only support a limited numbers of players, and the
+bottlenecks in the servers are both game-related and network-related. 
+In~\cite{Abdelkhalek2004++}, the authors extend their work and use the computer game
+Quake to study the behavior of parallelism. When running on a server with up to
+eight processing cores the game suffers because of lock synchronization during
+request processing. High wait times due to workload imbalances at global
+synchronization points are also a challenge.
+
+The industry is now experimenting with implementations that allow for
+a greater level of parallelization as a response to the lack of growth
+of single-processor hardware speedup. We take this model even further
+and propose a design that allows a game server to be classified as an
+embarrassingly parallel workload.
+
+In this demonstration, we show a game server model that allows for better
+resource utilization of multi-processor systems. We have implemented a prototype
+game using this design. The multithreaded implementation is compared with a
+single threaded implementation in order to measure the overhead of parallelizing
+the implementation and showing the experienced benefits of parallelization. Our
+results indicate that it is possible to design a game server to make it
+embarrassingly parallel. We can also see that the implementation is able to
+handle the quadratic increase of in- server communication that develops as many
+players interact in a game world hotspot.
+
+
+
+

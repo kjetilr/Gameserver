@@ -1,0 +1,19 @@
+\begin{abstract}
+Supporting thousands of interacting players in a virtual world poses
+huge challenges with respect to processing. To host as many
+players as possible, the server software has
+to implement support for massive parallelism. Earlier work within the
+field suggests that this is difficult due to synchronization issues, but
+in this paper, we present the design and implementation of a game server
+architecture based on a model that allows for massive parallelism.
+%The server design is evaluated using
+%replayed traces from actual gameplay to create server traffic. 
+%We also discuss challenges that arise as different
+%dependency requirements are introduced to the system. 
+Our prototype is evaluated using traces from live game sessions where
+we measure the server response time for all objects that need timely
+updates. We also measure how the response time for the multi-threaded
+implementation varies with the number of threads used. Our results
+show that the challenge of scaling up a game-server can be an
+embarrassingly parallel problem.
+\end{abstract}

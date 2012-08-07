@@ -1,0 +1,112 @@
+\section{Introduction}
+Over the last decade, online multi-player gaming has experienced an
+amazing growth. Providers of the popular online games must deliver a
+reliable service to thousands of concurrent players meeting strict
+processing deadlines in order for the players to have an acceptable
+quality of experience (QoE). 
+
+%% Game types and server architectures
+%% Game server architecture models.
+%% -FPS, RTS and small, local servers with low pings.
+%% -Separated gameworld instances, each with < 1000 players
+%% -Shards, grids and area of interest.
+
+%% Game designs that allow thousands of players to interact in a small
+%% space is also challenging.
+
+%#\PH{Note that we are submitting to a scheduling and resource
+%  management workshop - which is probably fine - but the abstract,
+%  intro and conclusion is targeted towards multimedia communities like
+%  NetGames and NOSSDAV. We should look at the CfP
+%  (http://www.mcs.anl.gov/~kettimut/srmpds/) and use some of the
+%  keywords used here. In other words, we should make some conclusions
+%  in all these three sections that say something about the keywords in
+%  the CFP!!! Thus, if this could be added (we do have room) where we
+%  describe our approach, it would be better for this conference...:
+%  ``resource allocation/management/scheduling, load sharing/balancing,
+%  performance, ... (these terms should be used ;-) )'', }
+
+One major goal for large game providers is to support as many
+concurrent players in a game-world as possible while preserving the
+strict latency requirements in order for the players to have an
+acceptable quality of experience (QoE). Load distribution in these systems is typically achieved by partitioning game-worlds into areas-of-interest to
+minimize message passing between players and to
+allow the game-world to be divided between servers. Load balancing is usually completely static, where each area has dedicated hardware. This approach is,
+however, limited by the distribution of players in the game-world, and
+the problem is that the distribution of players is heavy-tailed with
+about 30\% of players in 1\% of the game area~\cite{chen-2006}. To
+handle the most popular areas of the game world without reducing the
+maximum interaction distance for players, individual spatial
+partitions can not be serial. An MMO-server will experience the most CPU load while the players experience the most
+``action''. Hence, the worst case scenario for the server is when a
+large proportion of the players gather in a small area for high
+intensity gameplay.
+
+In such scenarios, the important metric for online multi-player games
+is latency. Claypool et. al.~\cite{claypool++-2006} classify different
+types of games and conclude that for first person shooter (FPS) and
+racing games, the threshold for an acceptable latency is 100ms. For
+other classes of networked games, like real-time strategy (RTS) and
+massively multi-player online games (MMOGs) players tolerate
+somewhat higher delays, but there are still strict latency
+requirements in order to provide a good QoE. The accumulated latency
+of network transmission, server processing and client processing adds
+up to the latencies that the user is experiencing, and reducing any of
+these latencies improves the users' experience.
+
+The traditional design of massively multi-player game servers rely on
+\textit{sharding} for further load distribution when too many players
+visit the same place simultaneously. Sharding involves making
+a new copy of an area of a game, where players in different copies are
+unable to interact. This approach eliminates most requirements for
+communication between the processes running individual shards. An
+example of such a design can be found in~\cite{chu-2008}.
+
+The industry is now experimenting with implementations that allow for
+a greater level of parallelization. One known example is Eve Online
+\cite{drain-2008} where they avoid \textit{sharding} and allow all
+players to potentially interact. Large-scale interactions in Eve
+Online are handled through an optimized database. On the local scale,
+however, the server is not parallel, and performance is extremely
+limited when too many players congregate in one area. With LEARS, we
+take this approach even further and focus on how many players that can
+be handled in a single segment of the game world. We present a model
+that allows for better resource utilization of multi-processor, game
+server systems which should not replace spatial partitioning
+techniques for work distribution, but rather complement them to
+improve on their limitations. Furthermore, a real prototype game is
+used for evaluation where captured traces are used to generate server
+load. We compare multi-threaded and single-threaded implementations in
+order to measure the overhead of parallelizing the implementation and
+showing the experienced benefits of parallelization. The change in
+responsiveness of different implementations with increased load on the
+server is studied, and we discuss how generic elements of this game
+design impact the performance on our chosen platform of
+implementation.
+
+Our results indicate that it is possible to design an ``embarrassingly
+parallel'' game server. We also observe that the implementation is
+able to handle a quadratic increase of in-server communication when
+many players interact in a game-world hotspot. 
+%\PH{Thus, here we
+%  should add some findings/conclusions/results in the area most
+%  relevant to the CFP''}
+
+The rest of the paper is organized as follows: In
+section~\ref{sec:concept}, we describe the basic idea of LEARS, before
+we present the design and implementation of the prototype in
+section~\ref{sec:implementation}. We evaluate our prototype in
+section~\ref{sec:eval} and discuss our idea in
+section~\ref{sec:disc}. In section~\ref{sec:related}, we put our idea
+in the context of other existing work. Finally, we summarize and conclude
+the paper in section~\ref{sec:conclusion} and give directions for
+further work in section~\ref{sec:fw}.
+
+%\PH{Another question is whether RW could be moved second (after the
+%  intro) so that it is better used as a MOTIVATION why we need LEARS?
+%  The last paragraph of RW is already highlighting the shortcomings
+%  of existing work - if we here really emphasize what is missing it is
+%  a good transition to the LEARS idea which would then come
+%  next.... (if so the outline paragraph above must also be changed.) -
+%  NOTE - this is last priority, first is to include more keywords from
+%  cfp}

@@ -1,0 +1,83 @@
+\section{Related Work}\label{sec:related}
+At Netgames 2011~\cite{raaen++2011}, we presented a demo with a preliminary version of LEARS.
+%
+There is also some earlier research on how to optimize game server
+architectures for online games, both MMOGs and smaller-scale games. In
+this section, we summarize some of the most important findings from
+related research in this field. 
+%
+For example, "Red Dwarf", the community-based successor to "Project
+Darkstar" by Sun Microsystems~\cite{waldo-2008}, is a good example 
+of a parallel approach to game server design. Here, response time is 
+considered one of the most important metrics for game server performance, 
+and suggests a parallel approach for scaling. The described system 
+uses transactions for all updates to world state, including player 
+position. This differs from LEARS, which invastigates the case for common actions where atomicity of transactions is not necessary. 
+
+Work has also been done on scaling games by looking at the
+optimization as a data management problem. The authors
+in~\cite{white-2007} have developed a highly expressive scripting
+language called SGL that provide game developers a data-driven AI
+scheme for non-player characters. By using query processing and
+indexing techniques, they can efficiently scale to a large number of
+non-player objects in games.
+%
+Moreover, Cai et al.~\cite{Cai2002++} present a scalable architecture
+for supporting large-scale interactive Internet games. Their approach
+divide the game world into multiple partitions and assign each
+partition to a server. The issues with this solution is that the
+architecture of the game server is still a limiting factor in worst
+case scenarios as only a limited number of players can interact in the
+same server partition at a given time. 
+%
+There have also been proposed
+several middleware systems for automatically distributing the game
+state among several participants. In~\cite{Glinka2007++}, the authors
+present a middleware which allows game developers to create
+large, seamless virtual worlds and to migrate zones between
+servers. This approach does, however, not solve the challenge of many
+players that want to interact in a popular
+area. 
+The research presented in~\cite{Muller2007++} shows that proxy
+servers are needed to scale the number of players in the game, while the authors discuss the possibility of
+using grids as servers for MMOGs. 
+
+%% Beskow et al.~\cite{Beskow2009++} have also been
+%% investigating partitioning and migration of game servers. Their
+%% approach uses core selection algorithms to locate the most optimal
+%% server.
+%% Low latency in the network is important to be able to support the
+%% deadlines for online games. In~\cite{Petlund2009}, games and
+%% interactive applications using TCP was shown to receive reduced
+%% retransmission latency when the retransmission mechanisms was modified
+%% to 
+%% We have worked on how to reduce latency by
+%% modifying the TCP protocol to better support time-dependent
+%% applications~\cite{Petlund2009}.  However, the latency is not only
+%% determined by the network, but also the response time for the game
+%% servers. If the servers have a to large workload, the latency will
+%% suffer.
+
+In~\cite{Abdelkhalek2003++}, the authors are discussing the behavior
+and performance of multi-player game servers. They find that in the
+terms of benchmarking methodology, game servers are very different
+from other scientific workloads. Most of the sequentially implemented
+game servers can only support a limited numbers of players, and the
+bottlenecks in the servers are both game-related and
+network-related. The authors in ~\cite{Abdelkhalek2004++} extend their
+work and use the computer game Quake to study the behavior of the game. When
+running on a server with up to eight processing cores the game suffers
+because of lock synchronization during request processing. High wait
+times due to workload imbalances at global synchronization points are
+also a challenge.
+
+There have been a lot of research has been performed on
+how to partition the server and scale the number of players by
+offloading to several servers.  Modern game servers have also been
+parallelized to scale with more processors. However, a large amount of
+processing time is still wasted on lock synchronization. In our game
+server design, we provide a complementary solution and try to
+eliminate the global synchronization points and locks, i.e., making the
+game server ``embarrassingly parallel'' which aims at
+increasing the number of concurrent users per machine.
+

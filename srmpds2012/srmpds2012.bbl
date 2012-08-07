@@ -1,0 +1,99 @@
+\begin{thebibliography}{10}
+
+\bibitem{Abdelkhalek2004++}
+A.~Abdelkhalek and A.~Bilas.
+\newblock Parallelization and performance of interactive multiplayer game
+  servers.
+\newblock In {\em Proceedings of the International Parallel and Distributed
+  Processing Symposium ({IPDPS})}, page~72, april 2004.
+
+\bibitem{Abdelkhalek2003++}
+A.~Abdelkhalek, A.~Bilas, and A.~Moshovos.
+\newblock Behavior and performance of interactive multi-player game servers.
+\newblock {\em Cluster Computing}, 6:355--366, October 2003.
+
+\bibitem{Beskow2009++}
+P.~B. Beskow, G.~A. Erikstad, P.~Halvorsen, and C.~Griwodz.
+\newblock Evaluating ginnungagap: a middleware for migration of partial
+  game-state utilizing core-selection for latency reduction.
+\newblock In {\em Proceedings of the 8th Annual Workshop on Network and Systems
+  Support for Games ({NetGames})}, pages 10:1--10:6, 2009.
+
+\bibitem{Cai2002++}
+W.~Cai, P.~Xavier, S.~J. Turner, and B.-S. Lee.
+\newblock A scalable architecture for supporting interactive games on the
+  internet.
+\newblock In {\em Proceedings of the sixteenth workshop on Parallel and
+  distributed simulation ({PADS})}, pages 60--67, 2002.
+
+\bibitem{chen-2006}
+K.-T. Chen and C.-L. Lei.
+\newblock Network game design: hints and implications of player interaction.
+\newblock In {\em Proceedings of the workshop on Network and system support for
+  games ({NetGames})}, 2006.
+
+\bibitem{chu-2008}
+H.~S. Chu.
+\newblock Building a simple yet powerful mmo game architecture.
+\newblock http://www.ibm.com/developerworks/architecture/library/ar-powerup1/,
+  Sept. 2008.
+
+\bibitem{claypool++-2006}
+M.~Claypool and K.~Claypool.
+\newblock Latency and player actions in online games.
+\newblock {\em Communications of the {ACM}}, 49(11):40--45, Nov. 2005.
+
+\bibitem{drain-2008}
+B.~Drain.
+\newblock Eve evolved: Eve online's server model.
+\newblock
+  http://massively.joystiq.com/2008/09/28/eve-evolved-eve-onlines-server-model/,
+  Sept. 2008.
+
+\bibitem{Glinka2007++}
+F.~Glinka, A.~Plo\ss, J.~M\"{u}ller-lden, and S.~Gorlatch.
+\newblock Rtf: a real-time framework for developing scalable multiplayer online
+  games.
+\newblock In {\em Proceedings of the workshop on Network and system support for
+  games ({NetGames})}, pages 81--86, 2007.
+
+\bibitem{Muller2007++}
+J.~M\"{u}ller and S.~Gorlatch.
+\newblock Enhancing online computer games for grids.
+\newblock In V.~Malyshkin, editor, {\em Parallel Computing Technologies},
+  volume 4671 of {\em Lecture Notes in Computer Science}, pages 80--95.
+  Springer Berlin / Heidelberg, 2007.
+
+\bibitem{Petlund2009}
+A.~Petlund.
+\newblock {\em Improving latency for interactive, thin-stream applications over
+  reliable transport}.
+\newblock Phd thesis, Simula Research Laboratory / University of Oslo, Unipub,
+  Oslo, Norway, 2009.
+
+\bibitem{raaen++2011}
+K.~Raaen, H.~Espeland, H.~K. Stensland, A.~Petlund, P.~Halvorsen, and
+  C.~Griwodz.
+\newblock A demonstration of a lockless, relaxed atomicity state parallel game
+  server ({LEARS}).
+\newblock In {\em Proceedings of the workshop on Network and system support for
+  games ({NetGames})}, pages 1--3, 2011.
+
+\bibitem{waldo-2008}
+J.~Waldo.
+\newblock Scaling in games and virtual worlds.
+\newblock {\em Commun. ACM}, 51:38--44, Aug. 2008.
+
+\bibitem{white-2007}
+W.~White, A.~Demers, C.~Koch, J.~Gehrke, and R.~Rajagopalan.
+\newblock Scaling games to epic proportions.
+\newblock In {\em Proceedings of the international conference on Management of
+  data {(SIGMOD)}}, pages 31--42, 2007.
+
+\bibitem{white++2008}
+W.~White, B.~Sowell, J.~Gehrke, and A.~Demers.
+\newblock Declarative processing for computer games.
+\newblock In {\em Proceedings of the ACM SIGGRAPH symposium on Video games
+  ({Sandbox})}, pages 23--30, 2008.
+
+\end{thebibliography}

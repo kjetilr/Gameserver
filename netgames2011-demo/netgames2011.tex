@@ -1,0 +1,62 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[norsk, english]{babel}
+\usepackage{epsfig, times}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{cite}
+\usepackage{textcomp}
+\usepackage{graphics}
+\usepackage{subfigure}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{wrapfig}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{color,soul}
+\usepackage{graphicx}
+
+\normalem
+
+\newcommand\PH[1]{\textcolor{blue}{(\it #1)}}
+\newcommand\HKS[1]{\textcolor{green}{(\it #1)}}
+
+\begin{document}
+
+%\title{Game server architectures for parallel execution and scalability}
+\title{A Demonstration Of a Lockless, Relaxed Atomicity State Parallel Game Server (LEARS)}
+
+\author{
+  Kjetil Raaen, H{\aa}vard Espeland, H{\aa}kon Kvale Stensland,
+  Andreas Petlund, P{\aa}l Halvorsen, Carsten Griwodz\\
+  NITH, Norway \ \ \ \ Simula Research Laboratory, Norway \ \ \ \ 
+  IFI, University of Oslo, Norway\\
+  Email: raakje@nith.no, \{haavares, haakonks, apetlund, paalh, griff\}@ifi.uio.no
+}
+
+
+\date{\today}
+\maketitle
+
+
+\input{abstract}
+\input{intro}
+\input{design}
+\input{demo}
+
+\section*{Acknowledgements}
+\noindent
+This work has been performed in the context of the  \textit{iAD} centre for
+Research-based Innovation (project number 174867) funded by the
+Norwegian Research Council.
+%% Kjetil: Insert NITH in acknowledgements if needed.
+
+\bibliographystyle{abbrv}
+\bibliography{all}
+
+\end{document}
+

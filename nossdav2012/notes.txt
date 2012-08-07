@@ -1,0 +1,73 @@
+Basic server concept:
+Gameserver basert på thread pools (Java)
+1 task per element.
+Message passing
+Never write to another state (can write to oneself). 
+Can always read.
+Rarely occuring events can lock the system?
+
+What to research?
+-Formulate dependency models.
+     -Identify different kinds of dependencies.
+-What kind of dependencies can be introduced before problems arise?
+-Transactions (economic, mana)
+-Initiated actions where the result is unresolved.
+-Scaling with hyperthreading
+
+What to measure?
+-Scalability (number of concurrent players)
+     -How to measure scalability?
+          -responsiveness (as seen from client side)
+-Client backlog (seen from server?)
+-Update latency
+-How does update latency manifest for each user?
+
+What to implement?
+Java server and client.
+Collision detection.
+Projectiles (as separate tasks)
+
+Trace dump format.
+-Server side trace?
+-Client side trace?
+
+Synthetic workload?
+-Create small game to capture realistic traces.
+
+-Single threaded
+-Multi threaded
+Networked? 
+Single node first
+
+Related / previous work?
+-Algorithms to handle events SFMA 2011
+-TODO: do search for related work
+
+Paper disposition:
+List state of the art:
+Industry uses threadpool architecture.
+Single-threaded models are still predominant in large MMOS.
+Task parallelism vs data parallelism.
+Describe our contribution:
+Quantifiable improvement by using threadpools.
+Penalty for introducing sentral dependency paradigms.
+...?
+Implement baseline (single-threaded) implementation.
+
+Quantify effects of dependency layers.
+Create table of interesting dependencies.
+
+- Potential further Work:
+Formel Modeling of deadlock detection in the game server.
+
+---------------------------------------------------------
+Read papers from comments.
+in which cases is this models applicable
+order of events is arbitrary even in single-threaded
+not a deterministic simulation
+system not consistent anyway
+red-dwarf/project darkstar
+"Scaling games to Epic Proportions"
+systematic list of cases
+response time metric makes sense :)
+papers analyzing load in exsisting systems.

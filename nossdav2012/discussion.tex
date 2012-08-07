@@ -1,0 +1,76 @@
+\section{Discussion}
+\label{sec:disc}
+
+%\subsection {Spatial partitioning} \label{sec:spatialpartitioning}
+
+Most approaches to multi-threaded game server implementations in the
+literature (e.g., ~\cite{Abdelkhalek2004++}) use some form of
+\textit{spatial partitioning} to lock parts of the game world while
+allowing separate parts to run in parallel. Spatial partitioning is
+also used in other situations to limit workload. The number of players
+that game designers can allow in one area in a game server is limited
+by the worst-case scenario. The worst case scenario for a spatially
+partitioned game world is when everybody move to the same point, where
+the spatial partitioning still ends up with everybody in the same
+partition regardless of granularity.  This paper investigate an
+orthogonal and complementary approach which tries to increase the
+maximum number of users in the worst case scenario where all players
+can see each other at all times. Thus, spatial partitioning could be
+added to further scale the game server.
+
+
+
+%, as we want to investigate the worst case scenario, hence
+%the numbers presented in this paper assume all players can see each
+%other at all times. This means that the number of messages and
+%interactions by necessity grows by the number of clients squared.
+
+%\subsection{Limitations}
+
+The LEARS approach does have \textit{limitations} and is for example not
+suitable if the outcome of a message put restrictions on an object's
+state. This is mainly a game design issue, but situations such as
+trades can be accommodated by doing full transactions. 
+%The following
+%example where two players trade illustrates the problem: Player A
+%sends a message to player B where he proposes to buy her sword for X
+%units. After this is sent, player C steals player A's money, and
+%player A is unable to pay player B should the request go through. 
+This is only a problem for trades \textit{within} a single game tick
+where the result of a message to another object puts a constraint on
+the original sender, and can be solved by means such as putting the
+money in escrow until the trade has been resolved, or by doing a
+transaction outside of LEARS (such as in a database).
+%
+Moreover, the design also adds some overhead in that the code is
+somewhat more complex, i.e., all communication between elements in the
+system needs to go through message queues. The same issue will also
+create some runtime overhead, but our results still demonstrate a
+significant benefit in terms of the supported number of clients.
+
+%% \subsection{Design issues}
+%% The non-blocking server architecture allows a massive growth of
+%% clients without raising server delays to critical levels. As the
+%% server load increases, there is, however, sporadic events that may
+%% reduce the QoE if the latency cannot be hidden from the user. Such
+%% events, of course, do also occur in a single-threaded, event loop
+%% based implementation. 
+%
+%\subsection {Garbage collection} The system described in this paper is a
+%response time sensitive application implemented in a garbage collected
+%programming language. This creates some potential issues. Garbage
+%collection implementations are often optimized for throughput rather
+%than response time, and common solutions even block all threads while
+%garbage collection runs. For large memory intensive systems the full
+%garbage collection can take in the order of seconds. This is
+%unacceptable in a response-time sensitive system. 
+%Fortunately some
+%work has been done on this. Java 6 has a concurrent garbage collector
+%~\cite{java:gcperformance}
+%that only locks the system for two brief periods, at the start and end
+%of the garbage collection run. The bulk of the work is done while the
+%system is executing normally. Utilizing this garbage collector reduces
+%the pauses due to garbage collection down towards acceptable
+%levels. 
+%Fortunately work in concurrent garbage collection algorithms is ongoing,
+%and the results are promising. ~\cite{detlefs++2004}

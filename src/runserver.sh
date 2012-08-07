@@ -1,0 +1,1 @@
+java -Dsystem.singlethreaded=false -Dsystem.numthreads=8 -Dsystem.numselectors=8 -cp out -Dload.intensity=1000 -Xmx12g -D_network.port=9060 -Dsystem.updateinterval=100 -XX:+UseConcMarkSweepGC server.NetworkSelector

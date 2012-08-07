@@ -1,0 +1,12 @@
+<jnlp spec="1.0" codebase="http://jefferson.simula.no/gameserver" href="GameClient.jnlp">
+   <information>
+      <title>Thread pool game client</title>
+      <vendor>Simula Research Laboratory / NITH</vendor>
+   </information>
+   <resources>
+      <property name="jnlp.publish-url" value="$$context/publish"/>
+      <j2se version="1.3+" href="http://java.sun.com/products/autodl/j2se"/>
+      <jar href="GameClient.jar"/>
+   </resources>
+   <application-desc main-class="client.ClientMain"/>
+</jnlp>

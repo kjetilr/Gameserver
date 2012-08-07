@@ -1,0 +1,24 @@
+\begin{abstract}
+Supporting thousands of interacting players in a virtual world poses
+huge challenges with respect to processing. Existing work that
+addresses the challenge utilizes a variety of spatial partitioning
+algorithms to distribute the load.  If, however, a large number of
+players needs to interact tightly across an area of the game world,
+spatial partitioning cannot subdivide this area without incurring
+massive communication costs, latency or inconsistency.  It is a major
+challenge of game engines to scale such areas to the largest number of
+players possible; in a deviation from earlier thinking, parallelism on
+multi-core architectures is applied to increase scalability.  In this
+paper, we evaluate the design and implementation of our game server
+architecture, called LEARS, which allows for lock-free parallel
+processing of a single spatial partition by considering every game
+cycle an atomic tick.
+%We also discuss challenges that arise as different
+%dependency requirements are introduced to the system. 
+Our prototype is evaluated using traces from live game sessions where
+we measure the server response time for all objects that need timely
+updates. We also measure how the response time for the multi-threaded
+implementation varies with the number of threads used. Our results
+show that the challenge of scaling up a game-server can be an
+embarrassingly parallel problem.
+\end{abstract}

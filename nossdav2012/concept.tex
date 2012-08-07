@@ -1,0 +1,92 @@
+\section{LEARS: The Basic Idea}\label{sec:concept}
+Traditionally, game servers have been implemented much like game
+clients. They are based around a main loop, which updates every active
+element in the game. These elements include for example player
+characters, non-player characters and projectiles. The simulated world
+has a list of all the active elements in the game and typically calls
+an ``update'' method on each element. The simulated time is kept
+constant throughout each iteration of the loop, so that all elements
+will get updates at the same points in simulated time. This point in
+time is refered to as a \textit{tick}.  Using this method, the active
+element will perform all its actions for the tick. Since only one
+element updates at a time, all actions can be performed directly. The
+character reads input from the network, performs updates on itself
+according to the input, and updates other elements with the results of
+its actions.
+
+%
+%To make a parallel game server with minimal locking, the system needs
+%to be designed from the ground up with parallelism in mind.
+LEARS is a game server model with support for lockless, relaxed
+atomicity state parallel execution.  The main concept is to split the
+game server executable into lightweight threads at the finest possible
+granularity. Each update of every player character, AI opponent and
+projectile runs as an independent work unit. Using this approach, the
+theoretical parallelism will be proportional to the load on the
+server. To do this, we must relax the presumed deterministic
+requirements of a game server, and we will show that this approach
+retains consistency and is applicable to real-world games.
+
+Our claim is that the ordering of events scheduled to execute at a
+tick does not always need to be considered. This is the case for many
+games and is mainly an issue of game design, i.e., what is the desired
+behavior if two players perform conflicting
+actions at the same instant. In the
+traditional main-loop approach, every event in a
+game scheduled for a tick are executed by the main loop. The
+main loop process these in arrival order. Thus, the ordering is highly
+influenced by the client latencies and at which point in time between
+two ticks the event was dispatched by the
+client. Remember that a tick is the smallest amount of time
+considered by the game, and this means there is no correct order to
+execute conflicting events within a single tick. As such, the
+ordering of events scheduled for a tick in a traditional main
+loop is \textit{not} deterministic. LEARS takes advantage of this
+relaxation and allows events scheduled
+for a tick to execute in any order.
+
+The second relaxation relates to game state consistency. The fine
+granularity creates a need for significant communication between threads
+to avoid problematic lock contentions. Systems where
+%
+elements can only update their own state and read any state
+without locking~\cite{Abdelkhalek2004++}
+%
+will obviously not work in all cases. However, game servers are not
+accurate simulators, and again, depending on the game design, some
+(internal) errors are acceptable without violating game state
+consistency. 
+%Consider
+%the following example: Character A moves while character B attacks. If
+%only the X coordinate of character A is updated at the point in time
+%when the attack is executed, the attack will see character A at position
+%$(X_{t+\Delta T},Y_{t})$.  This position is within the accuracy of the
+%simulation which in any case is no better than the distance an object
+%can move within $\Delta T$. The only requirement for this to work is
+%that assignment operations are atomic. 
+%
+On the other hand, for actions where a margin of error is not
+acceptable, transactions can be used keeping the object's state
+internally consistent. However, locking the state is
+expensive. Fortunately, most common game actions do not require
+transactions, an observation that we take advantage of in LEARS.
+%but if two variables in an object's game state must be
+%altered simultaneously to retain consistency, locking must be used.
+
+These two relaxations allow actions to be performed on game objects in
+any order without global locking. It can be implemented using message
+passing between threads and retains consistency for most game actions.
+This includes actions such as moving, shooting, spells and so forth.
+%Consider player A shooting at player B: A subtracts her ammunition state, and
+%send bullets in B's general direction by spawning bullet objects. The
+%bullet objects runs as independent threads, and if one of them hits player B, it
+%will send a message to player B. When reading this message, player B
+%subtracts his health and sends a message to player A if it reaches zero.
+%Player A then updates her statistics when she receives player B's message.
+The end result of our proposed design philosophy is that there is no
+synchronization in the server under normal running conditions. Since
+there are cases where transactions are required, they can be implemented
+outside the LEARS event handler running as transactions
+requiring locking. In the rest of the paper, we will consider a
+practical implementation of LEARS, and evaluate its performance and
+scalability.

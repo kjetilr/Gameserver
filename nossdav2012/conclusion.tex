@@ -1,0 +1,50 @@
+\section{Conclusion}
+\label{sec:conclusion} 
+
+In this paper, we have shown that game servers can scale well with the
+number of cores on a unified memory multi-processor system, even in
+the case where all players must be aware of all other players and
+their actions. The thread pool system balances load well between the
+cores, and its queue-based nature means that no task is starved unless
+the entire system lacks resources. Message passing through the
+blocking queue allows objects to communicate intensively without
+blocking each other. Running our prototype game, we show that the
+8-core server can handle a factor of 2 more clients before the
+response time becomes unacceptable.
+
+
+From the research described in this paper, a series of further
+experiments present themselves.
+%
+The relationship between linearly scaling load and quadratic load can
+be tweaked in our implementation. This could answer questions about
+which type of load scale better under multi-threaded implementations.
+%
+Another direction this work could be extended is to go beyond the
+single shared memory computer used and distribute the workload
+across clusters of computers. This could be achieved by implementing
+cross-server communication directly in the server code, or by using
+existing technology that makes cluster behave like shared memory
+machines. 
+%
+Furthermore, all experiments described here were run with an update frequency of
+10~Hz. This is good for many types of games, but different frequencies
+are relevant for different games. Investigating the effects of running
+with a higher or lower frequency of updates on server performance
+could yield interesting results.
+%
+If, during the implementation of a complex game, it is shown that some
+state changes must be atomic to keep the game state consistent, the
+message passing nature of this implementation means that we can use
+read-write-locks for any required blocking. If such cases are found
+investigating how read-write-locking influence performance would be
+worthwhile.
+%
+%Looking at the scope of garbage-collected languages, investigating how
+%different garbage collectors compare for this system would be
+%interesting. Investigating the newer multithreaded garbage collectors
+%would be particularly interesting. Will they make the garbage
+%collection overhead more manageable?  This naturally leads to the
+%question of how the system will work without any garbage collection,
+%by comparing the current Java implementation with a system written in
+%a language with manual memory management, preferably C++.
